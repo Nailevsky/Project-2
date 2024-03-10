@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= category %> Tools</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <h1><%= category %> Tools</h1>
+    <ul>
+        <% tools.forEach(tool => { %>
+            <li>
+                <input type="checkbox" <%= tool.checked ? 'checked' : '' %>>
+                <%= tool.name %>
+                <a href="/lists/<%= category %>/<%= tool._id %>/edit">Edit</a>
+                <form action="/lists/<%= category %>/<%= tool._id %>?_method=DELETE" method="POST">
+                    <button type="submit">Delete</button>
+                </form>
+            </li>
+        <% }) %>
+    </ul>
+    <form action="/lists/<%= category %>/new" method="POST">
+        <input type="text" name="name" placeholder="Tool Name" required>
+        <input type="hidden" name="category" value="<%= category %>">
+        <button type="submit">Add Tool</button>
+    </form>
+    <a href="/">Back to Home</a>
+</body>
+</html>

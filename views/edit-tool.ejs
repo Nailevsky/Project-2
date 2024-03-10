@@ -1,0 +1,20 @@
+<head>
+    
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+
+    <form  method="POST" action="/lists/<%= category %>/<%= tool._id %>?_method=PUT">
+        <input type="text" name="name" value="<%= tool.name %>" required>
+        <select name="category[]" multiple>
+            <option value="Painting" <%= tool.category.includes('Painting') ? 'selected' : '' %>>Painting</option>
+            <option value="Framing" <%= tool.category.includes('Framing') ? 'selected' : '' %>>Framing</option>
+            <option value="Finish Carpentry" <%= tool.category.includes('Finish Carpentry') ? 'selected' : '' %>>Finish Carpentry</option>
+        </select>
+        <button type="submit">Update Tool</button>
+    </form>
+
+ 
+</body>
