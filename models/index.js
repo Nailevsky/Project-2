@@ -12,5 +12,6 @@ db.on('connected', function () {
 // Export models and seed data to `server.js`
 module.exports = {
     Tool: require('./tool'),
+    User: require('./user'),
     seedTools: require('./seed')
 }
