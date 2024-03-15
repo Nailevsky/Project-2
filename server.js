@@ -13,9 +13,11 @@ const PORT = process.env.PORT || 3000
 // DB connection, models, and seed data
 const db = require('./models');
 
-const listsCtrl = require('./controllers/lists');
+const toolsCtrl = require('./controllers/tools')
 const userCtrl = require('./controllers/userController')
 const sessionCtrl = require('./controllers/sessionController')
+const listsCtrl = require('./controllers/lists')
+const jobsCtrl = require('./controllers/jobs')
 
 // Create the Express app
 const app = express();
@@ -59,7 +61,7 @@ app.use(methodOverride('_method'));
 app.use(morgan('tiny')) // morgan is just a logger
 
 app.get('/', function (req, res) {
-    res.redirect('/lists');
+    res.redirect('/tools');
 });
 
 app.get('/seed', function (req, res) {
@@ -75,9 +77,11 @@ app.get('/seed', function (req, res) {
 
 // This tells our app to look at the `controllers/tools.js` file 
 // to handle all routes that begin with `localhost:3000/tools`
-app.use('/lists', listsCtrl)
+app.use('/tools', toolsCtrl)
 app.use('/users', userCtrl)
 app.use('/sessions', sessionCtrl) // handles login and logout
+app.use('/lists', listsCtrl)
+app.use('/jobs', jobsCtrl)
 
 // The "catch-all" route: Runs for any other URL that doesn't match the above routes
 app.get('*', function (req, res) {

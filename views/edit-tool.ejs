@@ -6,7 +6,7 @@
 <body>
 
 
-    <form  method="POST" action="/lists/<%= category %>/<%= tool._id %>?_method=PUT">
+    <form  method="POST" action="/tools/<%= category %>/<%= tool._id %>?_method=PUT">
         <input type="text" name="name" value="<%= tool.name %>" required>
         <select name="category[]" multiple>
             <option value="Painting" <%= tool.category.includes('Painting') ? 'selected' : '' %>>Painting</option>

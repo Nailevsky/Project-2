@@ -13,5 +13,7 @@ db.on('connected', function () {
 module.exports = {
     Tool: require('./tool'),
     User: require('./user'),
-    seedTools: require('./seed')
+    seedTools: require('./seed'),
+    List: require('./list'),
+    Job: require('./job')
 }

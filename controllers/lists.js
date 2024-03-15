@@ -1,72 +1,41 @@
-// All routes on this page are prefixed with `localhost:3000/lists`
-// Require modules
+// controllers/lists.js
 const express = require('express');
-const router = express.Router(); // Router allows us to handle routing outside of server.js
-const db = require('../models'); // Require the db connection and models
-const isAuthenticated = require("../controllers/isAuthenticated");
+const router = express.Router();
+const db = require('../models');
+const isAuthenticated = require('../controllers/isAuthenticated');
 
-router.use(isAuthenticated); // attached the isAuthenticated middleware to the router
-// this applies to all routes in this file
-// I.N.D.U.C.E.S
+// Route to render the form for creating a new list
+router.get('/new', isAuthenticated, (req, res) => {
+    res.render('list', { currentUser: req.session.currentUser });
+});
 
-// INDEX - Get all items from the database and send them to the user
-router.get('/', (req, res) => {
-    console.log(req.session)
-    db.Tool.find({ user: req.session.currentUser._id }).then((tools) => {
-        res.render("list-home", {
-            tools: tools,
-            currentUser: req.session.currentUser
-        });
+// Route to create a new list
+router.post('/', isAuthenticated, async (req, res) => {
+    const newList = new db.List({
+        name: req.body.name,
+        user: req.session.currentUser._id
     });
+    await newList.save();
+    res.redirect('/lists'); // Redirect to a page where you can view all lists
 });
 
-// DELETE - Remove a tool from the database
-router.delete('/:category/:id', async (req, res) => {
-    await db.Tool.findByIdAndDelete(req.params.id)
-    .then(() => res.redirect(`/lists/${req.params.category}`));
+// Route to view all lists
+router.get('/', isAuthenticated, async (req, res) => {
+    const lists = await db.List.find({ user: req.session.currentUser._id }).populate('tools');
+    res.render('list-home', { lists: lists, currentUser: req.session.currentUser });
 });
 
-// UPDATE - Modify an existing tool in the database
-router.put('/:category/:id', async (req, res) => {
-    await db.Tool.findByIdAndUpdate(req.params.id, {
-        name: req.body.name,
-        category: req.body.category
-    }, { new: true })
-    .then((tool) => res.redirect(`/lists/${req.params.category}`))
-    .catch(err => res.send(err));
+// Route to add a tool to a list
+router.post('/:listId/tools', isAuthenticated, async (req, res) => {
+    const tool = await db.Tool.findById(req.body.toolId);
+    await db.List.findByIdAndUpdate(req.params.listId, { $push: { tools: tool._id } });
+    res.redirect(`/lists/${req.params.listId}`);
 });
 
-// CREATE - Add a new tool to the database
-router.post('/:category/new', async (req, res) => {
-    console.log(req.session);
-    req.body.user = req.session.currentUser._id;
-    await db.Tool.create({
-        name: req.body.name,
-        category: [req.params.category],
-        checked: false
-    })
-    .then(() => res.redirect(`/lists/${req.params.category}`))
-    .catch(err => res.send(err));
-});
-
-// EDIT - Display form to edit an existing tool (handled in the view)
-router.get('/:category/:id/edit', (req, res) => {
-    db.Tool.findById(req.params.id)
-        .then((tool) => {
-            res.render('edit-tool', {tool: tool, category: req.params.category,
-                currentUser: req.session.currentUser});
-        })
-        .catch(err => res.render('404'));
-});
-
-// SHOW - Display a single category with its tools
-router.get('/:category', (req, res) => {
-    db.Tool.find({category: {$in: [req.params.category]}})
-        .then((tools) => {
-            res.render('list', {tools: tools, category: req.params.category,
-                currentUser: req.session.currentUser});
-        })
-        .catch(() => res.render("404"));
+// Route to view a specific list
+router.get('/:listId', isAuthenticated, async (req, res) => {
+    const list = await db.List.findById(req.params.listId).populate('tools');
+    res.render('list', { list: list, currentUser: req.session.currentUser });
 });
 
 module.exports = router;

@@ -1,12 +1,8 @@
 <header>
-    <h1>List app</h1>
     <nav>
       <ul>
-        <!-- <li><a href="/">Home</a></li> -->
-        <li><a href="/">Home</a></li>
         <% if(currentUser){ %>
         <li>Welcome <%= currentUser.username %></li>
-        <li><a href="/lists/new">Create a New List</a></li>
         <li>
           <form action="/sessions/?_method=DELETE" method="POST">
             <input type="submit" value="Logout" />

@@ -1,19 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Tool Lists</title>
+    <title>List</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <nav>
-        <%- include('./partials/nav.ejs') %>
-    </nav>
-    <h1>Welcome to the Tool Lists</h1>
-    <ul>
-        <li><a href="/lists/Painting">Painting Tools</a></li>
-        <li><a href="/lists/Framing">Framing Tools</a></li>
-        <li><a href="/lists/Finish Carpentry">Finish Carpentry Tools</a></li>
-        <li><a href="/lists/new">Make a new list</a></li>
-    </ul>
+    <% lists.forEach(list => { %>
+        <div>
+            <h3><%= list.name %></h3>
+            <ul>
+                <% list.tools.forEach(tool => { %>
+                    <li><%= tool.name %></li>
+                <% }); %>
+            </ul>
+            <a href="/lists/<%= list._id %>">View List</a>
+        </div>
+    <% }); %>
+    <a href="/">Back Home</a>
 </body>
 </html>
