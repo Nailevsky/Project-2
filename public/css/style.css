@@ -1,7 +1,7 @@
 body {
   font-family: 'Pacifico', cursive;
   background-image: linear-gradient(135deg, #0c2919, #352b63, #3e3e24);
-  color: #000000;
+  color: #797615;
   padding: 20px;
   margin: 0;
   min-height: 100vh;
@@ -40,4 +40,97 @@ li a:hover {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     padding: 5px;
+}
+
+.tools-list {
+  list-style: none;
+  padding: 0;
+}
+
+.tool-item {
+  background-color: #f9f9f9; 
+  margin-bottom: 20px; 
+  padding: 20px; 
+  border-radius: 8px; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.tool-form {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.tool-checkbox {
+  margin-right: 15px;
+}
+
+.tool-name {
+  flex-grow: 1;
+}
+
+.edit-link, .delete-button {
+  margin-left: 10px;
+}
+
+.delete-button {
+  background-color: #f44336 !important;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+
+.delete-button:hover {
+  background-color: #d32f2f !important;
+}
+
+.add-tool-form, .job-form {
+  background-color: #f2f2f2;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.add-tool-form input, .job-form input, .job-form button, .add-tool-form button {
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.add-tool-form button, .job-form button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.add-tool-form button:hover, .job-form button:hover {
+  background-color: #45a049;
+}
+
+.back-home {
+  font-size: 30px;
+  display: inline-block;
+  margin-top: 20px;
+}
+
+input[type="checkbox"] {
+  transform: scale(2); 
+  margin: 10px; 
+  cursor: pointer;
+}
+
+.logout-button {
+  background-color: #614f4d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px; 
+  cursor: pointer; 
+  font-size: 16px;
+}
+
+
+.logout-button:hover {
+  background-color: #d32f2f; 
 }

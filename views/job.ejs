@@ -6,22 +6,29 @@
 </head>
 <body>
     <h1>Job name: <%= job.name %></h1>
-    <p>Address: <%= job.address %></p>
-    <p>Start Date: <%= job.startDate ? new Date(job.startDate).toDateString() : 'N/A' %></p>
-    <p>Finish Date: <%= job.finishDate ? new Date(job.finishDate).toDateString() : 'N/A' %></p>
-    <h2>Tools List</h2>
-    <form action="/jobs/update-finish-date/<%= job._id %>" method="POST">
+    <div class="job-form">
+        <p>Address: <%= job.address %></p>
+        <p>Start Date: <%= job.startDate ? new Date(job.startDate).toDateString() : 'N/A' %></p>
+        <p>Finish Date: <%= job.finishDate ? new Date(job.finishDate).toDateString() : 'N/A' %></p>
+    </div>
+    
+    <form action="/jobs/update-finish-date/<%= job._id %>" method="POST" class="job-form">
         <label for="newFinishDate">New Finish Date:</label>
         <input type="date" id="newFinishDate" name="newFinishDate" value="<%= job.finishDate ? job.finishDate.toISOString().split('T')[0] : '' %>">
         <button type="submit">Update Finish Date</button>
     </form>
-<ul>
-    <% tools.forEach(function(tool) { %>
-        <li><%= tool.name %></li>
-    <% }); %>
-</ul>
-<form action="/jobs/<%= job._id %>?_method=DELETE" method="post">
-    <button type="submit">Delete Job</button>
-</form>
-    <a href="/jobs">Back to Jobs List</a>
+
+    <h1>Tools List</h1>
+    <ul class="tools-list">
+        <% tools.forEach(function(tool) { %>
+            <li class="tool-item"><%= tool.name %></li>
+        <% }); %>
+    </ul>
+
+    <form action="/jobs/<%= job._id %>?_method=DELETE" method="post" class="job-form">
+        <button type="submit" class="delete-button">Delete Job</button>
+    </form>
+
+    <a href="/jobs" class="back-home">Back to Jobs List</a>
+</body>
 </html>

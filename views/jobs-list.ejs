@@ -1,21 +1,33 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Tool Lists</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jobs List</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-    <h1>Jobs List-</h1>
-    <ul>
-        <% jobs.forEach(function(job) { %>
-            <li>
-                <a href="/jobs/<%= job._id %>"><%= job.name %></a>
-                <form action="/jobs/<%= job._id %>?_method=DELETE" method="post" style="display: inline;">
-                    <button type="submit">Delete</button>
-                </form>
-            </li>
-        <% }); %>
-    </ul>
-    <a href="/">Back Home</a>
+    <h1>Jobs List</h1>
+    <div class="job-form">
+        <% if(jobs.length > 0) { %>
+            <ul class="tools-list">
+                <% jobs.forEach(function(job) { %>
+                    <li class="tool-item">
+                        <h2><%= job.name %></h2>
+                        <p>Address: <%= job.address %></p>
+                        <p>Start Date: <%= job.startDate ? new Date(job.startDate).toDateString() : 'N/A' %></p>
+                        <p>Finish Date: <%= job.finishDate ? new Date(job.finishDate).toDateString() : 'N/A' %></p>
+                        <a href="/jobs/<%= job._id %>" class="edit-link">View Details</a>
+                        <form action="/jobs/<%= job._id %>?_method=DELETE" method="post" style="display: inline;">
+                            <button type="submit" class="delete-button">Delete</button>
+                        </form>
+                    </li>
+                <% }); %>
+            </ul>
+        <% } else { %>
+            <p>No jobs found.</p>
+        <% } %>
+    </div>
+    <a href="/jobs/new" class="back-home">Add New Job</a>
 </body>
 </html>

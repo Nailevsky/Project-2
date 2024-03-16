@@ -1,20 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    
+    <title>Edit Tool</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
-
 <body>
+    <div class="job-form">
+        <form method="POST" action="/tools/<%= category %>/<%= tool._id %>?_method=PUT" class="add-tool-form">
+            <label for="toolName">Tool Name:</label>
+            <input type="text" id="toolName" name="name" value="<%= tool.name %>" required class="form-input">
 
+            <label for="toolCategory">Category:</label>
+            <select name="category[]" id="toolCategory" multiple class="form-select">
+                <option value="Painting" <%= tool.category.includes('Painting') ? 'selected' : '' %>>Painting</option>
+                <option value="Framing" <%= tool.category.includes('Framing') ? 'selected' : '' %>>Framing</option>
+                <option value="Finish Carpentry" <%= tool.category.includes('Finish Carpentry') ? 'selected' : '' %>>Finish Carpentry</option>
+            </select>
 
-    <form  method="POST" action="/tools/<%= category %>/<%= tool._id %>?_method=PUT">
-        <input type="text" name="name" value="<%= tool.name %>" required>
-        <select name="category[]" multiple>
-            <option value="Painting" <%= tool.category.includes('Painting') ? 'selected' : '' %>>Painting</option>
-            <option value="Framing" <%= tool.category.includes('Framing') ? 'selected' : '' %>>Framing</option>
-            <option value="Finish Carpentry" <%= tool.category.includes('Finish Carpentry') ? 'selected' : '' %>>Finish Carpentry</option>
-        </select>
-        <button type="submit">Update Tool</button>
-    </form>
-
- 
+            <button type="submit" class="form-button">Update Tool</button>
+        </form>
+    </div>
 </body>
+</html>
