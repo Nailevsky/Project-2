@@ -18,45 +18,30 @@ router.get('/new/:category', async (req, res) => {
 
 // Delete a job
 router.delete('/:id', async (req, res) => {
-    try {
-        await db.Job.findByIdAndDelete(req.params.id);
-        res.redirect('/jobs');
-    } catch (err) {
-        console.error(err);
-        res.render('404');
-    }
+    await db.Job.findByIdAndDelete(req.params.id);
+    res.redirect('/jobs');
 });
 
 // Update a job
 router.post('/update-finish-date/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const { newFinishDate } = req.body;
-        await db.Job.findByIdAndUpdate(id, { finishDate: newFinishDate });
-        res.redirect(`/jobs/${id}`); // Redirect back to the job page
-    } catch (err) {
-        console.error(err);
-        res.status(500).send('Error updating finish date');
-    }
+    const { id } = req.params;
+    const { newFinishDate } = req.body;
+    await db.Job.findByIdAndUpdate(id, { finishDate: newFinishDate });
+    res.redirect(`/jobs/${id}`); // Redirect back to the job page
 });
 
 // Create a new job
 router.post('/create', async (req, res) => {
-    try {
-        const { jobName, jobAddress, category, startDate, finishDate } = req.body;
-        const newJob = await db.Job.create({
-            name: jobName,
-            address: jobAddress,
-            user: req.session.currentUser._id,
-            category: category,
-            startDate,
-            finishDate
-        });
-        res.redirect('/jobs');
-    } catch (err) {
-        console.error(err);
-        res.send('Error creating new job');
-    }
+    const { jobName, jobAddress, category, startDate, finishDate } = req.body;
+    const newJob = await db.Job.create({
+        name: jobName,
+        address: jobAddress,
+        user: req.session.currentUser._id,
+        category: category,
+        startDate,
+        finishDate
+    });
+    res.redirect('/jobs');
 });
 
 router.get('/:id', async (req, res) => {
