@@ -6,8 +6,8 @@ https://lucid.app/lucidchart/7cc451d2-f78b-4f42-9ac6-38760b81f21f/edit?invitatio
 ## ERD
 https://lucid.app/lucidchart/b057ffb6-fb07-4275-bff3-0738a5c6aa44/edit?invitationId=inv_789031d0-cb02-4626-9dd0-79bd058dd15d
 
-## GitHub Repository
-https://github.com/Nailevsky/Project-2
+## Link to Your Deployed (Live) Site:
+[https://github.com/Nailevsky/Project-2](https://project2-list-app-8b22b6a6b15f.herokuapp.com/tools)
 
 
 ## Trello Bord for User Stories
