@@ -22,4 +22,4 @@ An MVP for a job-specific tool list management app will enable users to create c
 Add functionality to make a "for sale list" with leftover materials, evaluate them using API or make a bot to sell them.
 
 ## References
-ChatGPT for seed and CSS structure, and some code
+ChatGPT for seed and CSS structure, and some code debugging 
