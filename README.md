@@ -20,3 +20,6 @@ An MVP for a job-specific tool list management app will enable users to create c
 
 ## Stretch Goals (How your specific project look & behave *AFTER* you accomplish MVP)
 Add functionality to make a "for sale list" with leftover materials, evaluate them using API or make a bot to sell them.
+
+## References
+ChatGPT for seed and CSS structure
