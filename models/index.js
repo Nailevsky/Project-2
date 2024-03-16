@@ -14,6 +14,5 @@ module.exports = {
     Tool: require('./tool'),
     User: require('./user'),
     seedTools: require('./seed'),
-    List: require('./list'),
     Job: require('./job')
 }

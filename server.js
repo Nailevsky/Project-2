@@ -16,7 +16,6 @@ const db = require('./models');
 const toolsCtrl = require('./controllers/tools')
 const userCtrl = require('./controllers/userController')
 const sessionCtrl = require('./controllers/sessionController')
-const listsCtrl = require('./controllers/lists')
 const jobsCtrl = require('./controllers/jobs')
 
 // Create the Express app
@@ -80,7 +79,6 @@ app.get('/seed', function (req, res) {
 app.use('/tools', toolsCtrl)
 app.use('/users', userCtrl)
 app.use('/sessions', sessionCtrl) // handles login and logout
-app.use('/lists', listsCtrl)
 app.use('/jobs', jobsCtrl)
 
 // The "catch-all" route: Runs for any other URL that doesn't match the above routes
@@ -90,5 +88,5 @@ app.get('*', function (req, res) {
 
 // app.listen lets our app know which port to run
 app.listen(PORT, () => {
-    console.log("André", PORT)
+    console.log("Port", PORT)
 })

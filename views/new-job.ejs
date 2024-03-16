@@ -12,6 +12,10 @@
         <input type="text" id="jobName" name="jobName" required>
         <label for="jobAddress">Job Address:</label>
         <input type="text" id="jobAddress" name="jobAddress" required>
+        <label for="startDate">Start Date:</label>
+        <input type="date" id="startDate" name="startDate" required>
+        <label for="finishDate">Finish Date (optional):</label>
+        <input type="date" id="finishDate" name="finishDate">
         <button type="submit">Create Job</button>
     </form>
 
@@ -19,7 +23,7 @@
     <% tools.forEach(function(tool) { %>
         <li>
             <form action="/tools/<%= tool._id %>?_method=PUT" method="post">
-                <input type="checkbox" name="checked" onchange="this.form.submit()" <%= tool.checked ? 'checked' : '' %> >
+                <input type="checkbox" <%= tool.checked ? 'checked' : '' %>>
                 <%= tool.name %>
                 <a href="/tools/<%= category %>/<%= tool._id %>/edit">Edit</a>
                 <button formaction="/tools/<%= category %>/<%= tool._id %>?_method=DELETE" formmethod="post">Delete</button>

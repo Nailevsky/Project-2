@@ -4,14 +4,16 @@ const express = require('express');
 const router = express.Router(); // Router allows us to handle routing outside of server.js
 const db = require('../models'); // Require the db connection and models
 const isAuthenticated = require("./isAuthenticated");
+const seedTools = require('../models/seed');
 
 router.use(isAuthenticated); // attached the isAuthenticated middleware to the router
 // this applies to all routes in this file
 // I.N.D.U.C.E.S
 
 // INDEX - Get all items from the database and send them to the user
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     console.log(req.session)
+    await db.Tool.insertMany(seedTools);
     db.Tool.find({ user: req.session.currentUser._id }).then((tools) => {
         res.render("home", {
             tools: tools,
